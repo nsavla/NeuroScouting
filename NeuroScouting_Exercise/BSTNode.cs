@@ -30,33 +30,5 @@ namespace NeuroScouting_Exercise
                 print(root.right);
             }
         }
-
-        public BSTNode Insert(BSTNode root, int level, int data)
-        {
-            if(root == null)
-            {
-                root = new BSTNode(data, level);
-            }
-            else if(data <= root.data)
-            {
-                root.left = Insert(root.left, level, data);
-            } else
-            {
-                root.right = Insert(root.right, level, data);
-            }
-            return root;
-        }
-
-        public int FindHeight(BSTNode root)
-        {
-            if(root == null)
-            {
-                return -1;
-            }
-            int leftHeight = FindHeight(root.left);
-            int rightHeight = FindHeight(root.right);
-            int max = leftHeight > rightHeight ? leftHeight : rightHeight;
-            return (max + 1);
-        }
     };
 }

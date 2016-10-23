@@ -27,13 +27,16 @@ namespace NeuroScouting_Exercise
             root = new BSTNode(1,1);
             int curHeight = 1;
             queue.Enqueue(root);
+            //Comparing current height with he given height.
             while (curHeight < height)
             {
                 curHeight = curHeight + 1;
                 int i = 0;
+                //Determing the level of each elements in queue. All elements should be at a given level.
                 while (queue.ElementAt(i).level == curHeight - 1)
                 {
-                    BSTNode tempNode = queue.ElementAt(i); 
+                    BSTNode tempNode = queue.ElementAt(i);
+                    //Checking the left neighbour and adding the child.
                     BSTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight - 1), queue);
                     if (leftNeighbour == null)
                     {
@@ -45,6 +48,7 @@ namespace NeuroScouting_Exercise
                     }
                     queue.Enqueue(tempNode.left);
 
+                    //Checking the right neighbour and adding the child.
                     BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight - 1), queue);
                     if (rightNeighbour == null)
                     {
@@ -57,6 +61,7 @@ namespace NeuroScouting_Exercise
                     queue.Enqueue(tempNode.right);
                     i++;
                 }
+                //Deleting all elements at a given level still present in queue.
                 while (queue.Peek().level == (curHeight - 1))
                     queue.Dequeue();
             }
