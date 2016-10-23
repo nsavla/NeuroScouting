@@ -13,18 +13,18 @@ namespace NeuroScouting_Exercise
             Console.WriteLine("Enter the Height");
             string tempString = Console.ReadLine();
             int height = Int32.Parse(tempString);
-            BSTNode root = null;
+            BTNode root = null;
             //Some function which will be later declared.
             root = MakeTree(root, height);
             root.print(root);
             System.Console.ReadKey();
         }
 
-        static BSTNode MakeTree(BSTNode root, int height)
+        static BTNode MakeTree(BTNode root, int height)
         {
             //Root will always be added.
-            Queue<BSTNode> queue = new Queue<BSTNode>();
-            root = new BSTNode(1,1);
+            Queue<BTNode> queue = new Queue<BTNode>();
+            root = new BTNode(1,1);
             int curHeight = 1;
             queue.Enqueue(root);
             //Comparing current height with he given height.
@@ -35,28 +35,28 @@ namespace NeuroScouting_Exercise
                 //Determing the level of each elements in queue. All elements should be at a given level.
                 while (queue.ElementAt(i).level == curHeight - 1)
                 {
-                    BSTNode tempNode = queue.ElementAt(i);
+                    BTNode tempNode = queue.ElementAt(i);
                     //Checking the left neighbour and adding the child.
-                    BSTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight - 1), queue);
+                    BTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight - 1), queue);
                     if (leftNeighbour == null)
                     {
-                        tempNode.left = new BSTNode(1, curHeight);
+                        tempNode.left = new BTNode(1, curHeight);
                     }
                     else
                     {
-                        tempNode.left = new BSTNode(tempNode.data + leftNeighbour.data, curHeight);
+                        tempNode.left = new BTNode(tempNode.data + leftNeighbour.data, curHeight);
                     }
                     queue.Enqueue(tempNode.left);
 
                     //Checking the right neighbour and adding the child.
-                    BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight - 1), queue);
+                    BTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight - 1), queue);
                     if (rightNeighbour == null)
                     {
-                        tempNode.right = new BSTNode(1, curHeight);
+                        tempNode.right = new BTNode(1, curHeight);
                     }
                     else
                     {
-                        tempNode.right = new BSTNode(tempNode.data + rightNeighbour.data, curHeight);
+                        tempNode.right = new BTNode(tempNode.data + rightNeighbour.data, curHeight);
                     }
                     queue.Enqueue(tempNode.right);
                     i++;
@@ -68,14 +68,14 @@ namespace NeuroScouting_Exercise
             return root;
         }
 
-        static BSTNode GetLeftNeighbour(BSTNode node, int Height, Queue<BSTNode> queue)
+        static BTNode GetLeftNeighbour(BTNode node, int Height, Queue<BTNode> queue)
         {
             int x = queue.ToList().IndexOf(node);
             if (x == -1 || x == 0) return null;
             return queue.ElementAt(x - 1);
         }
 
-        static BSTNode GetRightNeighbour(BSTNode node, int Height, Queue<BSTNode> queue)
+        static BTNode GetRightNeighbour(BTNode node, int Height, Queue<BTNode> queue)
         {
             int x = queue.ToList().IndexOf(node);
             if (x == - 1 || x== (Math.Pow(2, Height - 1) - 1)) return null;

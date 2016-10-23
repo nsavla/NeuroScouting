@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace NeuroScouting_Exercise
 {
-    public class BSTNode
+    public class BTNode
     {
         public int data;
         public int level;
-        public BSTNode left;
-        public BSTNode right;
+        public BTNode left;
+        public BTNode right;
 
-        public BSTNode(int data, int level)
+        public BTNode(int data, int level)
         {
             this.left = null;
             this.right = null;
@@ -21,7 +21,7 @@ namespace NeuroScouting_Exercise
             this.level = level;
         }
 
-        public void print(BSTNode root)
+        public void print(BTNode root)
         {
             if (root != null)
             {
