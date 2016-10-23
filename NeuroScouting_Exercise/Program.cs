@@ -34,7 +34,7 @@ namespace NeuroScouting_Exercise
                 while (queue.ElementAt(i).level == curHeight - 1)
                 {
                     BSTNode tempNode = queue.ElementAt(i); 
-                    BSTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight + 1), queue);
+                    BSTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight - 1), queue);
                     if (leftNeighbour == null)
                     {
                         tempNode.left = new BSTNode(1, curHeight);
@@ -45,7 +45,7 @@ namespace NeuroScouting_Exercise
                     }
                     queue.Enqueue(tempNode.left);
 
-                    BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight + 1), queue);
+                    BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight - 1), queue);
                     if (rightNeighbour == null)
                     {
                         tempNode.right = new BSTNode(1, curHeight);
@@ -57,6 +57,8 @@ namespace NeuroScouting_Exercise
                     queue.Enqueue(tempNode.right);
                     i++;
                 }
+                while (queue.Peek().level == (curHeight - 1))
+                    queue.Dequeue();
             }
             return root;
         }
