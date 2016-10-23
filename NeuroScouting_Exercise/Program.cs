@@ -13,16 +13,19 @@ namespace NeuroScouting_Exercise
             Console.WriteLine("Enter the Height");
             string tempString = Console.ReadLine();
             int height = Int32.Parse(tempString);
-            Console.WriteLine("Height =" + height);
             BSTNode root = null;
             //Some function which will be later declared.
-            root = MakeTree(root, 4);
+            root = MakeTree(root, height);
+            root.print(root);
             System.Console.ReadKey();
         }
 
-        static BSTNode MakeTree(BSTNode root, int level)
+        static BSTNode MakeTree(BSTNode root, int height)
         {
-            // Empty for now.
+            Queue<BSTNode> queue = new Queue<BSTNode>();
+            root = new BSTNode(1);
+            queue.Enqueue(root);
+
             return root;
         }
     }
