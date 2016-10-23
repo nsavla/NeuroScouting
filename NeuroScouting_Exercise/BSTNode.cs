@@ -9,14 +9,16 @@ namespace NeuroScouting_Exercise
     public class BSTNode
     {
         public int data;
+        public int level;
         public BSTNode left;
         public BSTNode right;
 
-        public BSTNode(int data)
+        public BSTNode(int data, int level)
         {
             this.left = null;
             this.right = null;
             this.data = data;
+            this.level = level;
         }
 
         public void print(BSTNode root)
@@ -29,18 +31,18 @@ namespace NeuroScouting_Exercise
             }
         }
 
-        public BSTNode Insert(BSTNode root, int data)
+        public BSTNode Insert(BSTNode root, int level, int data)
         {
             if(root == null)
             {
-                root = new BSTNode(data);
+                root = new BSTNode(data, level);
             }
             else if(data <= root.data)
             {
-                root.left = Insert(root.left, data);
+                root.left = Insert(root.left, level, data);
             } else
             {
-                root.right = Insert(root.right, data);
+                root.right = Insert(root.right, level, data);
             }
             return root;
         }

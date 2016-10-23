@@ -24,49 +24,54 @@ namespace NeuroScouting_Exercise
         {
             //Root will always be added.
             Queue<BSTNode> queue = new Queue<BSTNode>();
-            root = new BSTNode(1);
+            root = new BSTNode(1,1);
             int curHeight = 1;
             queue.Enqueue(root);
-            while(curHeight < height)
+            while (curHeight < height)
             {
-                BSTNode tempNode = queue.Dequeue();
-                BSTNode leftNeighbour = GetLeftNeighbour(tempNode, queue);
-                if (leftNeighbour == null)
-                {
-                    tempNode.left = new BSTNode(1);
-                }
-                else
-                {
-                    tempNode.left = new BSTNode(tempNode.data + leftNeighbour.data);
-                }
-                queue.Enqueue(tempNode.left);
-
-                BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight + 1) , queue);
-                if (rightNeighbour == null)
-                {
-                    tempNode.right = new BSTNode(1);
-                }
-                else
-                {
-                    tempNode.right = new BSTNode(tempNode.data + rightNeighbour.data);
-                }
-                queue.Enqueue(tempNode.right);
                 curHeight = curHeight + 1;
+                int i = 0;
+                while (queue.ElementAt(i).level == curHeight - 1)
+                {
+                    BSTNode tempNode = queue.ElementAt(i); 
+                    BSTNode leftNeighbour = GetLeftNeighbour(tempNode, (curHeight + 1), queue);
+                    if (leftNeighbour == null)
+                    {
+                        tempNode.left = new BSTNode(1, curHeight);
+                    }
+                    else
+                    {
+                        tempNode.left = new BSTNode(tempNode.data + leftNeighbour.data, curHeight);
+                    }
+                    queue.Enqueue(tempNode.left);
+
+                    BSTNode rightNeighbour = GetRightNeighbour(tempNode, (curHeight + 1), queue);
+                    if (rightNeighbour == null)
+                    {
+                        tempNode.right = new BSTNode(1, curHeight);
+                    }
+                    else
+                    {
+                        tempNode.right = new BSTNode(tempNode.data + rightNeighbour.data, curHeight);
+                    }
+                    queue.Enqueue(tempNode.right);
+                    i++;
+                }
             }
             return root;
         }
 
-        static BSTNode GetLeftNeighbour(BSTNode node, Queue<BSTNode> queue)
+        static BSTNode GetLeftNeighbour(BSTNode node, int Height, Queue<BSTNode> queue)
         {
             int x = queue.ToList().IndexOf(node);
-            if (x == -1 ) return null;
+            if (x == -1 || x == 0) return null;
             return queue.ElementAt(x - 1);
         }
 
         static BSTNode GetRightNeighbour(BSTNode node, int Height, Queue<BSTNode> queue)
         {
             int x = queue.ToList().IndexOf(node);
-            if (x == - 1) return null;
+            if (x == - 1 || x== (Math.Pow(2, Height - 1) - 1)) return null;
             return queue.ElementAt(x + 1);
         }
 
