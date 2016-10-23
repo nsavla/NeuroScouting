@@ -22,11 +22,34 @@ namespace NeuroScouting_Exercise
 
         static BSTNode MakeTree(BSTNode root, int height)
         {
+            //Root will always be added.
             Queue<BSTNode> queue = new Queue<BSTNode>();
             root = new BSTNode(1);
+            int curHeight = 1;
             queue.Enqueue(root);
-
+            while(curHeight < height)
+            {
+                BSTNode tempNode = queue.Dequeue();
+                BSTNode leftNeighbour = GetLeftNeighbour(tempNode, queue);
+                if (leftNeighbour == null)
+                {
+                    tempNode.left = new BSTNode(1);
+                }
+                else
+                {
+                    tempNode.left = new BSTNode(tempNode.data + leftNeighbour.data);
+                }
+                queue.Enqueue(tempNode.left);
+                curHeight = curHeight + 1;
+            }
             return root;
+        }
+
+        static BSTNode GetLeftNeighbour(BSTNode node, Queue<BSTNode> queue)
+        {
+            int x = queue.ToList().IndexOf(node);
+            if (x == -1 ) return null;
+            return queue.ElementAt(x - 1);
         }
     }
 }
