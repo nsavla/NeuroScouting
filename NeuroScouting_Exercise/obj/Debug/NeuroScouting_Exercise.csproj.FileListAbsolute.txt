@@ -1,0 +1,1 @@
+c:\users\nsavl\documents\visual studio 2015\Projects\NeuroScouting_Exercise\NeuroScouting_Exercise\bin\Debug\NeuroScouting_Exercise.exe.config
